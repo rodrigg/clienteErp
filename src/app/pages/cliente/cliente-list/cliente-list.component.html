@@ -1,45 +1,64 @@
-<table class="table table-striped">
-  <thead>
-    <tr >
-      <th>Nombre</th>
-      <th>Telefono</th>
-      <th>Direccion</th>
-      <th>Editar</th>
-      <th>Borrar</th>
-   </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let itemCliente of clienteLista">
-    <td>{{itemCliente.nombre}}</td>
-    <td>{{itemCliente.telefono}}</td>
-    <td>{{itemCliente.direccion}}</td>
-    <td><button class="btn btn-primary" (click)="elegirCliente(itemCliente)">Editar</button></td>
-    <td><button class="btn btn-danger" (click)="borrarCliente(itemCliente)">Eliminar</button></td>
-
- </tr>
-  </tbody>
-</table>
-
-
-<form #formCliente="ngForm" (ngSubmit)="agregarCliente(); formCliente.reset()">
-  <div class="form-group">
-      <label for="nombre">Nombre</label>
-      <input type="text" class="form-control" id="nombre"
-            required
-            [(ngModel)]="cliente.nombre" name="nombre" #nombre="ngModel">
-            <span *ngIf="nombre.touched && !nombre.valid">Nombre requerido</span>
-    </div>
+<div class="row">
+  
+    <div class="col-8">
+     
     
-    <div class="form-group">
-      <label for="telefono">telefono</label>
-      <input type="text"  class="form-control" id="descripcion"
-            [(ngModel)]="cliente.telefono" name="telefono">
+      <table class="table table-striped">
+        <thead>
+          <tr >
+            <th>Nombre</th>
+            <th>Telefono</th>
+            <th>Direccion</th>
+            <th>Editar</th>
+            <th>Borrar</th>
+         </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let itemCliente of clienteLista; let i = index" [class.active]="i == selectedRow">
+          <td>{{itemCliente.nombre}}</td>
+          <td>{{itemCliente.telefono}}</td>
+          <td>{{itemCliente.direccion}}</td>
+          <td><button class="btn btn-primary" (click)="elegirCliente(itemCliente,i)">Editar</button></td>
+          <td><button class="btn btn-danger" (click)="borrarCliente(itemCliente)">Eliminar</button></td>
+      
+       </tr>
+        </tbody>
+      </table>
+    
     </div>
-    <div class="form-group">
-        <label for="direccion">direccion</label>
-        <input type="text"  class="form-control" id="direccion"
-              [(ngModel)]="cliente.direccion" name="direccion">
+    <div class="col-4">
+        <button class="btn btn-primary" (click)="resetearForm()">Nuevo</button>
+        <br/>
+        <br/>
+      <div *ngIf="cliente">
+      <form #formCliente="ngForm" (ngSubmit)="agregarCliente(); formCliente.reset()">
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" class="form-control" id="nombre"
+                  required
+                  [(ngModel)]="cliente.nombre" name="nombre" #nombre="ngModel">
+                  <span class="error" *ngIf="nombre.touched && !nombre.valid">Nombre requerido</span>
+          </div>
+          
+          <div class="form-group">
+            <label for="telefono">telefono</label>
+            <input type="text"  class="form-control" id="descripcion"
+                  [(ngModel)]="cliente.telefono" name="telefono">
+          </div>
+          <div class="form-group">
+              <label for="direccion">direccion</label>
+              <input type="text"  class="form-control" id="direccion"
+                    [(ngModel)]="cliente.direccion" name="direccion">
+            </div>
+          <button type="submit"[disabled]="!formCliente.form.valid" >Guardar</button>
+          
+        </form>
+        </div>
       </div>
-    <button type="submit"[disabled]="!formCliente.form.valid" >Guardar</button>
-    
-  </form> 
+  </div>
+
+
+
+
+
+

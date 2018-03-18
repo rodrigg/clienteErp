@@ -11,10 +11,10 @@ import { ClienteService } from '../../../services/cliente.service';
 export class ClienteListComponent implements OnInit {
   public clienteLista:Cliente[];
   public cliente:Cliente;
+  public selectedRow:number;
   constructor(public clienteService:ClienteService) { }
 
   ngOnInit() {
-    this.cliente=new Cliente("","","","","")
     this.getClientes();
 
 
@@ -38,6 +38,9 @@ export class ClienteListComponent implements OnInit {
         
     }
 
+    this.cliente=null;
+    this.selectedRow=null;
+
     
     
 
@@ -45,8 +48,9 @@ export class ClienteListComponent implements OnInit {
 
 
   }
-  elegirCliente(cliente:Cliente){
+  elegirCliente(cliente:Cliente,index){
     this.cliente= Object.assign({}, cliente);
+    this.selectedRow = index;
   }
 
   borrarCliente(cliente:Cliente){
@@ -57,6 +61,11 @@ export class ClienteListComponent implements OnInit {
     this.clienteService.getClientes().subscribe((clientes)=>
     {
       this.clienteLista=clientes;} );
+  }
+  resetearForm(){
+    this.cliente=new Cliente("","","","","")
+    this.selectedRow=null;
+
   }
 }
 
