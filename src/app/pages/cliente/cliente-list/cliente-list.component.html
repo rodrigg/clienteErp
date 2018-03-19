@@ -5,6 +5,11 @@
     
       <table class="table table-striped">
         <thead>
+            <tr >
+                <td><input  [(ngModel)]="clienteBuscar.nombre" type="text"/></td>
+                <td><input  [(ngModel)]="clienteBuscar.telefono" type="text"/></td>
+                <td><input  [(ngModel)]="clienteBuscar.direccion" type="text"/></td>
+            </tr>
           <tr >
             <th>Nombre</th>
             <th>Telefono</th>
@@ -14,7 +19,7 @@
          </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let itemCliente of clienteLista; let i = index" [class.active]="i == selectedRow">
+        <tr *ngFor="let itemCliente of clienteLista | buscadorCliente:this.clienteBuscar; let i = index" [class.active]="i == selectedRow">
           <td>{{itemCliente.nombre}}</td>
           <td>{{itemCliente.telefono}}</td>
           <td>{{itemCliente.direccion}}</td>

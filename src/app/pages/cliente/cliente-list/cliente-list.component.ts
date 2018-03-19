@@ -11,10 +11,13 @@ import { ClienteService } from '../../../services/cliente.service';
 export class ClienteListComponent implements OnInit {
   public clienteLista:Cliente[];
   public cliente:Cliente;
+  public clienteBuscar:Cliente;
+
   public selectedRow:number;
   constructor(public clienteService:ClienteService) { }
 
   ngOnInit() {
+    this.clienteBuscar=new Cliente("","","","","");
     this.getClientes();
 
 

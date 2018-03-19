@@ -9,6 +9,18 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { ClienteListComponent } from './pages/cliente/cliente-list/cliente-list.component';
 import { routing } from './router';
 import { HomeComponent } from './pages/home/home.component';
+import { BuscadorClientePipe } from './pipes/buscador-cliente.pipe';
+import { AlertComponent } from './login/alert/alert.component';
+import { LoginComponent } from './login/login/login.component';
+import { RegisterComponent } from './login/register/register.component';
+import { ErrorInterceptorProvider } from './login/error.interceptor';
+import { JwtInterceptorProvider } from './login/jwt.interceptor';
+import { UserService } from './login/user.service';
+import { AuthenticationService } from './login/authentication.service';
+import { AuthGuard } from './login/auth.guard';
+import { AlertService } from './login/alert.service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
 
 
 @NgModule({
@@ -16,14 +28,26 @@ import { HomeComponent } from './pages/home/home.component';
     AppComponent,
     NavbarComponent,
     ClienteListComponent,
-    HomeComponent
+    HomeComponent,
+    BuscadorClientePipe,
+    AlertComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule
     ,HttpModule
-    ,FormsModule,routing
+    ,FormsModule,routing,HttpClientModule
+ 
+    
+   
   ],
-  providers: [],
+  providers: [   AuthGuard,
+    AlertService,
+    AuthenticationService,
+    UserService,
+    ErrorInterceptorProvider,
+    JwtInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
