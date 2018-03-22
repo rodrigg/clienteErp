@@ -20,6 +20,8 @@ import { AuthenticationService } from './login/authentication.service';
 import { AuthGuard } from './login/auth.guard';
 import { AlertService } from './login/alert.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ClienteComponent } from './cliente/cliente.component';
+import { ProductosComponent } from './productos/productos.component';
 
 
 
@@ -32,7 +34,9 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     BuscadorClientePipe,
     AlertComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ClienteComponent,
+    ProductosComponent
   ],
   imports: [
     BrowserModule

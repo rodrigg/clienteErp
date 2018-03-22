@@ -8,15 +8,19 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class ClienteService {
   private url="http://localhost:8080/api/v1/clientes";
+  public listaClientes:Cliente;
+  public clienteElegido:Cliente;
   constructor(private http:Http) { }
-
-
+    
     getClientes():Observable<Cliente[]>{
       
       return this.http.get(this.url).map(cliente=>
                                         cliente.json());
     }
-
+    getCliente(id:string):Observable<Cliente>{
+      return this.http.get(this.url+"/"+id).map(cliente=>
+                                        cliente.json());
+    }
     agregarClientes(cliente:Cliente):Observable<Cliente>{
 
      
@@ -34,7 +38,7 @@ export class ClienteService {
     }
 
 
-  
+    
  }
 
 

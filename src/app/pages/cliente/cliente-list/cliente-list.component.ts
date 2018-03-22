@@ -14,43 +14,17 @@ export class ClienteListComponent implements OnInit {
   public clienteBuscar:Cliente;
 
   public selectedRow:number;
-  constructor(public clienteService:ClienteService) { }
+  constructor(public clienteService:ClienteService) { this.getClientes();
+  }
 
   ngOnInit() {
     this.clienteBuscar=new Cliente("","","","","");
-    this.getClientes();
 
 
 
 
   }
-  agregarCliente(){
-    if(this.cliente._id==="" || !this.cliente._id){
-      this.clienteService.agregarClientes(this.cliente)
-                         .subscribe((cliente)=>
-                              this.clienteLista.push(cliente),
-                              (error)=>console.log(error));
-    }
-    else{
 
-      this.clienteService.modificarClientes(this.cliente)
-      .subscribe((cliente)=>{ this.getClientes();
-                             },
-                 (error)=>console.log(error));
-           
-        
-    }
-
-    this.cliente=null;
-    this.selectedRow=null;
-
-    
-    
-
-   
-
-
-  }
   elegirCliente(cliente:Cliente,index){
     this.cliente= Object.assign({}, cliente);
     this.selectedRow = index;
@@ -66,7 +40,6 @@ export class ClienteListComponent implements OnInit {
       this.clienteLista=clientes;} );
   }
   resetearForm(){
-    this.cliente=new Cliente("","","","","")
     this.selectedRow=null;
 
   }
